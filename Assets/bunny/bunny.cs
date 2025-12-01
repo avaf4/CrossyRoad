@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class bunny : MonoBehaviour
 {
     public float speed = 2f;
-        Animator animator;
-    Vector3 start;
+    Animator animator;
+    Vector3 start, current;
+    GameObject parent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,13 +54,27 @@ public class bunny : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Horse"))
+        if (collision.CompareTag("Respawn"))
         {
             transform.position = start;
+            GameManager.Score -= 10;
+            GameManager.Lives -= 1;
         }
-        if (collision.CompareTag("Water") && collision.CompareTag("Lily Pad"))
+        else if (collision.CompareTag("Water"))
         {
-            transform.position = Vector3.MoveTowards(transform.position, start, .03f);
+            current = transform.position;
+            if (collision.CompareTag("Log") || collision.CompareTag("Turtle") || collision.CompareTag("Lily Pad")) {
+                parent = gameObject;
+                transform.position = parent.transform.position + current;
+            }
+            else{
+                transform.position = start;
+            }
+        }
+        else if (collision.CompareTag("Finish"))
+        {
+            transform.position = start;
+            GameManager.Score += 20;
         }
     }
 }

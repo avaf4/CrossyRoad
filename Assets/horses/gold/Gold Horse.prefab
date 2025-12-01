@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 321074679341474410}
   m_Layer: 0
   m_Name: Gold Horse
-  m_TagString: Horse
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19444e131fb73493e8d7e29f292cbc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::walk_around
-  speed: 2
+  speed: 1
 --- !u!114 &8438542121554982805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +177,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.84375, y: 0.875}
-  m_Direction: 0
+  m_Offset: {x: 0.0018042909, y: -0.012624713}
+  m_Size: {x: 0.7992555, y: 0.77761537}
+  m_Direction: 1

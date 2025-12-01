@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1167246381152253641}
   m_Layer: 0
   m_Name: Silver Horse
-  m_TagString: Horse
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +177,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.09375, y: 1.09375}
-  m_Direction: 0
+  m_Offset: {x: -0.029140478, y: -0.012705324}
+  m_Size: {x: 1.0790281, y: 1.0102781}
+  m_Direction: 1
