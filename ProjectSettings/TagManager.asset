@@ -8,7 +8,6 @@ TagManager:
   - Logs
   - Lily Pad
   - Water
-  - Mid
   layers:
   - Default
   - TransparentFX

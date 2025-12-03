@@ -43,11 +43,11 @@ public class bunny : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                transform.Translate(Vector2.up * 0.7f);
+                transform.Translate(Vector2.up * 0.75f);
             }
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                transform.Translate(Vector2.down * 0.7f);
+                transform.Translate(Vector2.down * 0.75f);
             }
         }
         // ensuring bunny goes back down if it goes beyond the game screen
@@ -72,7 +72,7 @@ public class bunny : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // checking if bunny has parent
+        // respawning whenever bunny hits obstacle
         if (collision.CompareTag("Respawn"))
         {
             transform.position = start;
@@ -108,10 +108,19 @@ public class bunny : MonoBehaviour
     }
     // continuously tracks the collision status of triggers that are still touching
     private void OnTriggerStay2D(Collider2D collision){
+        // bool hasParent;
         // if the bunny is colliding with the water, and the bunny has no parent, the bunny dies
         if (collision.CompareTag("Water")){
-            if(transform.parent == null)
+            if (transform.parent == null)
             {
+            //     hasParent = false;
+            // }
+            // else
+            // {
+            //     hasParent = true;
+            // }
+            // if(hasParent == false)
+            // {
                 transform.position = start;
                 GameManager.Score -= 10;
                 GameManager.Lives -= 1;
