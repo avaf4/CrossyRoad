@@ -44,4 +44,8 @@ Acheievement sound:
 
 Death sound:
     Death by jacksonacademyashmore -- https://freesound.org/s/414209/ -- License: Creative Commons 0
+
+Splash Screen, Lose Screen, Win Screen:
+    Author: Me, Ava Flanigan
+    Medium: Canva
 */
