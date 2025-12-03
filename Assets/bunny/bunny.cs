@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.Animations;
-
 public class bunny : MonoBehaviour
 {
     public float speed = 2f;
+    float y;
     Animator animator;
-    Vector3 start, current;
-    GameObject parent;
+    Vector3 start;
+    public GameObject point, death;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,10 +32,29 @@ public class bunny : MonoBehaviour
             animator.SetBool("right", false);
             animator.SetBool("left", false);
         }
-
-
-        float y = Input.GetAxis("Vertical");
-        transform.Translate(Vector2.up * y * speed * Time.deltaTime);
+        
+        y = Input.GetAxis("Vertical");
+        // allowing bunny to travel vertically at user-provided speed in the bottom half of the screen
+        if (transform.position.y <= 0.3){
+            transform.Translate(Vector2.up * y * speed * Time.deltaTime);
+        }
+        // ensuring bunny takes measured steps in the upper-half of the screen
+        else if (transform.position.y > 0.3 && transform.position.y < 5)
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                transform.Translate(Vector2.up * 0.7f);
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                transform.Translate(Vector2.down * 0.7f);
+            }
+        }
+        // ensuring bunny goes back down if it goes beyond the game screen
+        else
+        {
+            transform.Translate(Vector2.down * 0.7f);
+        }
         if (y > 0.05f) // going up
         {
             animator.SetBool("back", true);
@@ -54,27 +72,53 @@ public class bunny : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // checking if bunny has parent
         if (collision.CompareTag("Respawn"))
         {
             transform.position = start;
             GameManager.Score -= 10;
             GameManager.Lives -= 1;
+            Instantiate(death);
         }
-        else if (collision.CompareTag("Water"))
-        {
-            current = transform.position;
-            if (collision.CompareTag("Log") || collision.CompareTag("Turtle") || collision.CompareTag("Lily Pad")) {
-                parent = gameObject;
-                transform.position = parent.transform.position + current;
-            }
-            else{
-                transform.position = start;
-            }
+        // checks if bunny is on log, turtle, or lily pad and sets parent to one of the three options
+        if (collision.CompareTag("Logs") || collision.CompareTag("Turtle") || collision.CompareTag("Lily Pad")){
+            transform.SetParent(collision.gameObject.transform);
         }
-        else if (collision.CompareTag("Finish"))
+        // adds points to player's score when they reach the carrot
+        if (collision.CompareTag("Finish"))
         {
             transform.position = start;
             GameManager.Score += 20;
+            Instantiate(point);
+        }
+        
+    }
+    // when the bunny gets off the log, turtle, or lily pad, the parent gets removed
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Logs")){
+            transform.SetParent(null);
+        }
+        if (collision.CompareTag("Turtle")){
+            transform.SetParent(null);
+        }
+        if (collision.CompareTag("Lily Pad")){
+            transform.SetParent(null);
+        }
+    }
+    // continuously tracks the collision status of triggers that are still touching
+    private void OnTriggerStay2D(Collider2D collision){
+        // if the bunny is colliding with the water, and the bunny has no parent, the bunny dies
+        if (collision.CompareTag("Water")){
+            if(transform.parent == null)
+            {
+                transform.position = start;
+                GameManager.Score -= 10;
+                GameManager.Lives -= 1;
+                Instantiate(death);
+            }
+
         }
     }
 }
+

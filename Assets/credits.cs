@@ -38,4 +38,10 @@ Losing sound:
 
 Game song:
     Cartoon Game Theme Loop 3.wav by Mrthenoronha -- https://freesound.org/s/513427/ -- License: Attribution NonCommercial 4.0
+
+Acheievement sound:
+    Collect_Point_01.wav by LittleRobotSoundFactory -- https://freesound.org/s/270303/ -- License: Attribution 4.0
+
+Death sound:
+    Death by jacksonacademyashmore -- https://freesound.org/s/414209/ -- License: Creative Commons 0
 */
